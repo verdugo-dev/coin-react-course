@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react'
-import './App.css'
 import Coin from './components/Coin'
 import { coins } from './data/coins'
 import type { CoinInterface } from './interface/Coint';
@@ -21,7 +20,7 @@ function App() {
 
       <input type="text" placeholder='Buscar Criptomoneda' ref={searchInput} onChange={handleSearch}/>
 
-      <div>
+      <div className='coins-list'>
         {
           coinsList.map(coin => (
             <Coin key={coin.order} {...coin} />

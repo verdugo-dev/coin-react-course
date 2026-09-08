@@ -10,7 +10,7 @@ const Coin = ({ order, name, symbol, price, priceChange, code }: CoinInterface) 
     };
 
     return (
-        <div>
+        <div className="coin-card">
             <span>{order}</span>
             <h2>{name}</h2>
             <span>{symbol}</span>
