@@ -7,6 +7,8 @@ import { CoinsNotFound } from "./CoinsNotFound";
 export const CoinsContainer = () => {
     const [coinsList, setCoinsList] = useState<CoinInterface[]>([]);
     const [coinsListOriginal, setCoinsListOriginal] = useState<CoinInterface[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>();
     const searchInput = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
@@ -19,6 +21,10 @@ export const CoinsContainer = () => {
             })
             .catch(error => {
                 console.error("Error al obtener los datos: ", error);
+                setError("Error al obtener los datos");
+            })
+            .finally(() => {
+                setLoading(false);
             })
     }, []);
 
@@ -26,6 +32,23 @@ export const CoinsContainer = () => {
         const searchValue = searchInput.current?.value || '';
         const newCoinList = coinsListOriginal.filter(coin => coin.name.toLowerCase().includes(searchValue.toLowerCase()));
         setCoinsList(newCoinList);
+    }
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center min-h-[50vh]">
+                <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
+            </div>
+        );
+    }
+
+
+    if (error) {
+        return (
+            <div className=" text-red-800 p-4 rounded-lg text-center">
+                {error}
+            </div>
+        );
     }
 
 
