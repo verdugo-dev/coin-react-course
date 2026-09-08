@@ -1,12 +1,12 @@
 import Header from './components/Header'
-import { CoinstTable } from './components/CoinstTable';
+import { CoinsContainer } from './components/CoinsContainer';
 
 function App() {
   return (
     <>
       <Header />
       <h1 className="text-center py-4">Lista de Criptomonedas</h1>
-      <CoinstTable/>
+      <CoinsContainer/>
     </>
   )
 }

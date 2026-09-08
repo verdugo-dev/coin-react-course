@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CoinInterface } from "../interface/Coint";
 
-const Coin = ({ order, name, icon, symbol, price, priceChange, code }: CoinInterface) => {
+const Coin = ({  name, image, symbol, current_price, price_change_24h }: CoinInterface) => {
 
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
@@ -11,17 +11,15 @@ const Coin = ({ order, name, icon, symbol, price, priceChange, code }: CoinInter
 
     return (
         <tr className="border-b border-gray-200 hover:bg-gray-50 transition-colors">
-            <td className="px-4 py-3 text-sm text-gray-400">{order}</td>
             <td className="px-4 py-3 text-sm">
                 <div className="flex items-center gap-2">
-                    <img src={icon} alt={name} className="w-6 h-6 rounded-full object-cover ring-1 ring-gray-200" />
+                    <img src={image} alt={name} className="w-6 h-6 rounded-full object-cover ring-1 ring-gray-200" />
                     <span className="font-semibold text-gray-900">{name}</span>
                 </div>
             </td>
             <td className="px-4 py-3"><span className="bg-gray-100 text-gray-700 px-2 py-1 rounded-md text-xs font-medium">{symbol}</span></td>
-            <td className="px-4 py-3 text-sm font-medium text-gray-800">{price}</td>
-            <td className={`px-4 py-3 text-sm font-medium ${priceChange >= 0 ? "text-emerald-600" : "text-red-600"}`}>{priceChange}</td>
-            <td className="px-4 py-3 text-sm text-gray-400 uppercase">{code}</td>
+            <td className="px-4 py-3 text-sm font-medium text-gray-800">{current_price}</td>
+            <td className={`px-4 py-3 text-sm font-medium ${price_change_24h >= 0 ? "text-emerald-600" : "text-red-600"}`}>{price_change_24h}</td>
             <td className="px-4 py-3">
                 <button
                     onClick={handleFavorites}
