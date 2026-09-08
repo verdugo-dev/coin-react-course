@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { CoinstTable } from "./CoinstTable"
 import { CoinInterface } from "../interface/Coint";
 import { CoinsNotFound } from "./CoinsNotFound";
+import { URL_API } from "../constants/api";
 
 
 export const CoinsContainer = () => {
@@ -11,9 +12,11 @@ export const CoinsContainer = () => {
     const [error, setError] = useState<string | null>();
     const searchInput = useRef<HTMLInputElement>(null);
 
+    const URL_COINS = "coins/markets?vs_currency=usd&per_page=10&page=1";
+
     useEffect(() => {
         const data = [];
-        fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=10&page=1`)
+        fetch(`${URL_API}/${URL_COINS}`)
             .then(resp => resp.json())
             .then(data => {
                 setCoinsList(data)

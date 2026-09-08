@@ -3,11 +3,6 @@ import { CoinInterface } from "../interface/Coint";
 import Coin from "./Coin";
 
 export const CoinstTable = ({ coins }: { coins: CoinInterface[] }) => {
-
-    useEffect(() => {
-        console.log("Coinst table renderizado")
-    })
-    
     return (
         <>
 
