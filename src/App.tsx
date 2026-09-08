@@ -1,34 +1,12 @@
-import { useRef, useState } from 'react'
 import Header from './components/Header'
-import Coin from './components/Coin'
-import { coins } from './data/coins'
-import type { CoinInterface } from './interface/Coint';
+import { CoinstTable } from './components/CoinstTable';
 
 function App() {
-
-  const [coinsList, setCoinsList] = useState<CoinInterface[]>(coins);
-  const searchInput = useRef<HTMLInputElement>(null);
-
-  const handleSearch = () => {
-    const searchValue = searchInput.current?.value || '';
-    const newCoinList = coins.filter(coin => coin.name.toLowerCase().includes(searchValue.toLowerCase()));
-    setCoinsList(newCoinList);
-  }
-
   return (
     <>
       <Header />
-      <h1>Lista de Criptomonedas</h1>
-
-      <input type="text" placeholder='Buscar Criptomoneda' ref={searchInput} onChange={handleSearch}/>
-
-      <div className='coins-list'>
-        {
-          coinsList.map(coin => (
-            <Coin key={coin.order} {...coin} />
-          ))
-        }
-      </div>
+      <h1 className="text-center py-4">Lista de Criptomonedas</h1>
+      <CoinstTable/>
     </>
   )
 }

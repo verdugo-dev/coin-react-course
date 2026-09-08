@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CoinInterface } from "../interface/Coint";
 
-const Coin = ({ order, name, symbol, price, priceChange, code }: CoinInterface) => {
+const Coin = ({ order, name, icon, symbol, price, priceChange, code }: CoinInterface) => {
 
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
@@ -10,17 +10,30 @@ const Coin = ({ order, name, symbol, price, priceChange, code }: CoinInterface) 
     };
 
     return (
-        <div className="coin-card">
-            <span>{order}</span>
-            <h2>{name}</h2>
-            <span>{symbol}</span>
-            <span>{price}</span>
-            <span>{priceChange}</span>
-            <span>{code}</span>
-            <button onClick={handleFavorites}>
-                {isFavorite ? "Eliminar de favoritos" : "Agregar a favoritos"}
-            </button>
-        </div>
+        <tr className="border-b border-gray-200 hover:bg-gray-50 transition-colors">
+            <td className="px-4 py-3 text-sm text-gray-400">{order}</td>
+            <td className="px-4 py-3 text-sm">
+                <div className="flex items-center gap-2">
+                    <img src={icon} alt={name} className="w-6 h-6 rounded-full object-cover ring-1 ring-gray-200" />
+                    <span className="font-semibold text-gray-900">{name}</span>
+                </div>
+            </td>
+            <td className="px-4 py-3"><span className="bg-gray-100 text-gray-700 px-2 py-1 rounded-md text-xs font-medium">{symbol}</span></td>
+            <td className="px-4 py-3 text-sm font-medium text-gray-800">{price}</td>
+            <td className={`px-4 py-3 text-sm font-medium ${priceChange >= 0 ? "text-emerald-600" : "text-red-600"}`}>{priceChange}</td>
+            <td className="px-4 py-3 text-sm text-gray-400 uppercase">{code}</td>
+            <td className="px-4 py-3">
+                <button
+                    onClick={handleFavorites}
+                    className={`cursor-pointer px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${isFavorite
+                        ? "bg-blue-600 text-white hover:bg-blue-700"
+                        : "border border-blue-600 text-blue-600 hover:bg-blue-50"
+                    }`}
+                >
+                    {isFavorite ? "Eliminar de favoritos" : "Agregar a favoritos"}
+                </button>
+            </td>
+        </tr>
     )
 }
 
