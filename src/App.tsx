@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import Header from './components/Header'
 import Coin from './components/Coin'
 import { coins } from './data/coins'
 import type { CoinInterface } from './interface/Coint';
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <>
+      <Header />
       <h1>Lista de Criptomonedas</h1>
 
       <input type="text" placeholder='Buscar Criptomoneda' ref={searchInput} onChange={handleSearch}/>
