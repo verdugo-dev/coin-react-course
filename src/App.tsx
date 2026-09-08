@@ -1,13 +1,21 @@
-import Header from './components/Header'
-import { CoinsContainer } from './components/CoinsContainer';
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { Layout } from "./components/Layout"
+import { CoinsContainer } from "./components/CoinsContainer"
+import { NotFound } from "./components/NotFound"
+import { WatchListContainer } from "./components/WatchList"
 
 function App() {
   return (
-    <>
-      <Header />
-      <h1 className="text-center py-4">Lista de Criptomonedas</h1>
-      <CoinsContainer/>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={ <Layout/> }>
+          <Route index element={ <CoinsContainer/> } />
+          <Route path="watchList" element={<WatchListContainer/>}/>
+          <Route path="coin/:id" element={<WatchListContainer/>} />
+          <Route path="*" element={ <NotFound/>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 

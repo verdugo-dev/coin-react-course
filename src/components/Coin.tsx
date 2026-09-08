@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CoinInterface } from "../interface/Coint";
+import { Link } from "react-router-dom";
 
 const Coin = ({  name, image, symbol, current_price, price_change_24h }: CoinInterface) => {
 
@@ -13,8 +14,10 @@ const Coin = ({  name, image, symbol, current_price, price_change_24h }: CoinInt
         <tr className="border-b border-gray-200 hover:bg-gray-50 transition-colors">
             <td className="px-4 py-3 text-sm">
                 <div className="flex items-center gap-2">
-                    <img src={image} alt={name} className="w-6 h-6 rounded-full object-cover ring-1 ring-gray-200" />
-                    <span className="font-semibold text-gray-900">{name}</span>
+                    <Link to={`/coin/${name}`}>
+                        <img src={image} alt={name} className="w-6 h-6 rounded-full object-cover ring-1 ring-gray-200" />
+                        <span className="font-semibold text-gray-900">{name}</span>
+                    </Link>
                 </div>
             </td>
             <td className="px-4 py-3"><span className="bg-gray-100 text-gray-700 px-2 py-1 rounded-md text-xs font-medium">{symbol}</span></td>

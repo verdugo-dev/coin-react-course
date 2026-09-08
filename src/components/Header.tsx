@@ -1,12 +1,16 @@
+import { Link } from "react-router-dom"
+
 const Header = () => {
   return (
     <header className="flex justify-between items-center p-4 bg-blue-950 text-white border-b border-blue-900">
       <div className="font-crypto text-xl font-bold">
-        <span className="text-blue-400">Crypto</span><span className="text-white">App</span>
+        <Link to="">
+          <span className="text-blue-400">Crypto</span><span className="text-white">App</span>
+        </Link>
       </div>
       <nav className="flex gap-6">
-        <a href="#" className="text-gray-300 hover:text-white">Overview</a>
-        <a href="#" className="text-gray-300 hover:text-white">Watchlist</a>
+        <Link to="/overview" className="text-gray-300 hover:text-white">Overview</Link>
+        <Link to="/watchList" className="text-gray-300 hover:text-white">Watchlist</Link>
       </nav>
     </header>
   )
