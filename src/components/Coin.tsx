@@ -2,12 +2,22 @@ import { useState } from "react";
 import { CoinInterface } from "../interface/Coint";
 import { Link } from "react-router-dom";
 
-const Coin = ({  name, image, symbol, current_price, price_change_24h }: CoinInterface) => {
+const Coin = ({ id, name, image, symbol, current_price, price_change_24h }: CoinInterface) => {
 
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
-
+    
     const handleFavorites = () => {
+        const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
         setIsFavorite(!isFavorite);
+
+        if (!isFavorite) {
+            localStorage.setItem(`favorites`, JSON.stringify([...favorites, id]));
+
+        } else {
+            const filteredFavorites = favorites.filter( (favorite: string) => favorite != id);
+            localStorage.setItem(`favorites`, JSON.stringify(filteredFavorites));
+        }
+
     };
 
     return (
