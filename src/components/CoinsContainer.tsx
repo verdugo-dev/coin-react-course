@@ -11,7 +11,7 @@ export const CoinsContainer = () => {
 
     const [search, setSearch] = useState('');
 
-    const {data: coinsList, isLoading, error} = useQuery({
+    const {data: coinsList, isLoading, isFetching, error} = useQuery({
         queryKey: ['cryptos'],
         queryFn: getCryptos,
     });
@@ -74,10 +74,10 @@ export const CoinsContainer = () => {
                 onChange={e => setSearch(e.target.value)} 
                 className="w-full max-w-3xl mx-auto mb-4 block px-4 py-2.5 rounded-lg border border-gray-300 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
             
-            {
-                filteredCoins && filteredCoins.length > 0 
-                    ? (<CoinstTable coins={filteredCoins} />)
-                    : (<CoinsNotFound />)
+            { isFetching && <div>Actualizando datos...</div>}
+            { filteredCoins && filteredCoins.length > 0 
+                ? (<CoinstTable coins={filteredCoins} />)
+                : (<CoinsNotFound />)
             }
         </>
     )
