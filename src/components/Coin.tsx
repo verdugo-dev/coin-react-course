@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { CoinInterface } from "../interface/Coint";
 import { Link } from "react-router-dom";
 import { FavoritesContext } from "../context/FavoritesContext";
+import { useFavoritesStore } from "../store/favoritesStore";
 
 const Coin = ({ id, name, image, symbol, current_price, price_change_24h }: CoinInterface) => {
 
@@ -27,7 +28,8 @@ const Coin = ({ id, name, image, symbol, current_price, price_change_24h }: Coin
     //     }
     // };
 
-    const {isFavorite, addFavorite, removeFavorite} = useContext(FavoritesContext);
+    // const {isFavorite, addFavorite, removeFavorite} = useContext(FavoritesContext);
+    const {isFavorite, addFavorite, removeFavorite} = useFavoritesStore();
 
     const handleFavorites = () => {
         isFavorite(id) ? removeFavorite(id) : addFavorite(id);

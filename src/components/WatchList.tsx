@@ -4,6 +4,7 @@ import { CoinInterface } from "../interface/Coint";
 import { CoinsNotFound } from "./CoinsNotFound";
 import { URL_API, URL_COINS } from "../constants/api";
 import { FavoritesContext } from "../context/FavoritesContext";
+import { useFavoritesStore } from "../store/favoritesStore";
 
 
 export const WatchListContainer = () => {
@@ -12,7 +13,8 @@ export const WatchListContainer = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>();
     const searchInput = useRef<HTMLInputElement>(null);
-    const {favorites, clearFavorites} = useContext(FavoritesContext);
+    // const {favorites, clearFavorites} = useContext(FavoritesContext);
+    const {favorites, clearFavorites} = useFavoritesStore();
 
     useEffect(() => {
         fetch(`${URL_API}/${URL_COINS}&ids=${favorites.join(",")}`)

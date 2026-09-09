@@ -8,7 +8,18 @@ import { FavoritesProvider } from "./context/FavoritesProvider"
 
 function App() {
   return (
-    <FavoritesProvider>
+    // <FavoritesProvider>
+    //   <BrowserRouter>
+    //     <Routes>
+    //       <Route path="/" element={ <Layout/> }>
+    //         <Route index element={ <CoinsContainer/> } />
+    //         <Route path="watchList" element={<WatchListContainer/>}/>
+    //         <Route path="coin/:id" element={<CoinContainer/>} />
+    //         <Route path="*" element={ <NotFound/>} />
+    //       </Route>
+    //     </Routes>
+    //   </BrowserRouter>
+    // </FavoritesProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={ <Layout/> }>
@@ -19,7 +30,6 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </FavoritesProvider>
   )
 }
 
