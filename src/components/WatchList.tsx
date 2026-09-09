@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { CoinstTable } from "./CoinstTable"
 import { CoinInterface } from "../interface/Coint";
 import { CoinsNotFound } from "./CoinsNotFound";
 import { URL_API, URL_COINS } from "../constants/api";
+import { FavoritesContext } from "../context/FavoritesContext";
 
 
 export const WatchListContainer = () => {
@@ -11,10 +12,9 @@ export const WatchListContainer = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>();
     const searchInput = useRef<HTMLInputElement>(null);
+    const {favorites, clearFavorites} = useContext(FavoritesContext);
 
     useEffect(() => {
-        const data = [];
-        const favorites = JSON.parse(localStorage.getItem("favorites") || "[]")
         fetch(`${URL_API}/${URL_COINS}&ids=${favorites.join(",")}`)
             .then(resp => resp.json())
             .then(data => {

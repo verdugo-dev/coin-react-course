@@ -1,31 +1,37 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { CoinInterface } from "../interface/Coint";
 import { Link } from "react-router-dom";
+import { FavoritesContext } from "../context/FavoritesContext";
 
 const Coin = ({ id, name, image, symbol, current_price, price_change_24h }: CoinInterface) => {
 
-    const [isFavorite, setIsFavorite] = useState<boolean>(false);
+    // const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
-    useEffect(() => {
-        const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-        setIsFavorite(favorites.includes(id));
-    }, []);
+    // useEffect(() => {
+    //     const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+    //     setIsFavorite(favorites.includes(id));
+    // }, []);
     
-    const handleFavorites = () => {
-        const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-        
-        if (isFavorite) {
-            // Remove from favorites
-            const filteredFavorites = favorites.filter( (favId: string) => favId != id);
-            localStorage.setItem(`favorites`, JSON.stringify(filteredFavorites));
-            setIsFavorite(false);
-        } else {
-            // Add to favorites
-            localStorage.setItem(`favorites`, JSON.stringify([...favorites, id]));
-            setIsFavorite(true);
-        }
+    // const handleFavorites = () => {
+    //     const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+    //     if (isFavorite) {
+    //         // Remove from favorites
+    //         const filteredFavorites = favorites.filter( (favId: string) => favId != id);
+    //         localStorage.setItem(`favorites`, JSON.stringify(filteredFavorites));
+    //         setIsFavorite(false);
+    //     } else {
+    //         // Add to favorites
+    //         localStorage.setItem(`favorites`, JSON.stringify([...favorites, id]));
+    //         setIsFavorite(true);
+    //     }
+    // };
 
-    };
+    const {isFavorite, addFavorite, removeFavorite} = useContext(FavoritesContext);
+
+    const handleFavorites = () => {
+        isFavorite(id) ? removeFavorite(id) : addFavorite(id);
+    }
 
     return (
         <tr className="border-b border-gray-200 hover:bg-gray-50 transition-colors">
@@ -43,12 +49,12 @@ const Coin = ({ id, name, image, symbol, current_price, price_change_24h }: Coin
             <td className="px-4 py-3">
                 <button
                     onClick={handleFavorites}
-                    className={`cursor-pointer px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${isFavorite
+                    className={`cursor-pointer px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${isFavorite(id)
                         ? "bg-blue-600 text-white hover:bg-blue-700"
                         : "border border-blue-600 text-blue-600 hover:bg-blue-50"
                     }`}
                 >
-                    {isFavorite ? "Eliminar de favoritos" : "Agregar a favoritos"}
+                    {isFavorite(id) ? "Eliminar de favoritos" : "Agregar a favoritos"}
                 </button>
             </td>
         </tr>
