@@ -39,9 +39,10 @@ export const WatchListContainer = () => {
     }
 
     const handleClearFavorites = () => {
-        localStorage.removeItem("favorites")
-        setCoinsList([]);
-        setCoinsListOriginal([]);
+        // localStorage.removeItem("favorites")
+        // setCoinsList([]);
+        // setCoinsListOriginal([]);
+        clearFavorites();
     }
 
     if (loading) {
@@ -64,7 +65,9 @@ export const WatchListContainer = () => {
 
     return (
         <>
-            <button onClick={handleClearFavorites} className="bg-red-500">Limpiar</button>
+            <div className="w-full max-w-3xl mx-auto mb-4">
+                <button onClick={handleClearFavorites} className="cursor-pointer px-3 py-1.5 rounded-full text-xs font-medium transition-colors border border-red-600 text-red-600 hover:bg-red-50">Limpiar</button>
+            </div>
             <input type="text" placeholder='Buscar Criptomoneda Favorita' ref={searchInput} onChange={handleSearch} className="w-full max-w-3xl mx-auto mb-4 block px-4 py-2.5 rounded-lg border border-gray-300 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
             
             {
