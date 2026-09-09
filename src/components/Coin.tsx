@@ -1,21 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CoinInterface } from "../interface/Coint";
 import { Link } from "react-router-dom";
 
 const Coin = ({ id, name, image, symbol, current_price, price_change_24h }: CoinInterface) => {
 
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
+
+    useEffect(() => {
+        const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+        setIsFavorite(favorites.includes(id));
+    }, []);
     
     const handleFavorites = () => {
         const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-        setIsFavorite(!isFavorite);
-
-        if (!isFavorite) {
-            localStorage.setItem(`favorites`, JSON.stringify([...favorites, id]));
-
-        } else {
-            const filteredFavorites = favorites.filter( (favorite: string) => favorite != id);
+        
+        if (isFavorite) {
+            // Remove from favorites
+            const filteredFavorites = favorites.filter( (favId: string) => favId != id);
             localStorage.setItem(`favorites`, JSON.stringify(filteredFavorites));
+            setIsFavorite(false);
+        } else {
+            // Add to favorites
+            localStorage.setItem(`favorites`, JSON.stringify([...favorites, id]));
+            setIsFavorite(true);
         }
 
     };
