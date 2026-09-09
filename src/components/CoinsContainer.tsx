@@ -9,10 +9,14 @@ import { getCryptos } from "../services/coinService";
 
 export const CoinsContainer = () => {
 
+    const [search, setSearch] = useState('');
+
     const {data: coinsList, isLoading, error} = useQuery({
         queryKey: ['cryptos'],
         queryFn: getCryptos,
     });
+
+    const filteredCoins = coinsList?.filter(coin => coin.name.toLowerCase().includes(search.toLowerCase())) ?? [];
 
     // const [coinsList, setCoinsList] = useState<CoinInterface[]>([]);
     // const [coinsListOriginal, setCoinsListOriginal] = useState<CoinInterface[]>([]);
@@ -63,11 +67,16 @@ export const CoinsContainer = () => {
 
     return (
         <>
-            {/* <input type="text" placeholder='Buscar Criptomoneda' ref={searchInput} onChange={handleSearch} className="w-full max-w-3xl mx-auto mb-4 block px-4 py-2.5 rounded-lg border border-gray-300 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" /> */}
+            <input 
+                type="text" 
+                placeholder='Buscar Criptomoneda' 
+                ref={searchInput} 
+                onChange={e => setSearch(e.target.value)} 
+                className="w-full max-w-3xl mx-auto mb-4 block px-4 py-2.5 rounded-lg border border-gray-300 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
             
             {
-                coinsList && coinsList.length > 0 
-                    ? (<CoinstTable coins={coinsList} />)
+                filteredCoins && filteredCoins.length > 0 
+                    ? (<CoinstTable coins={filteredCoins} />)
                     : (<CoinsNotFound />)
             }
         </>
