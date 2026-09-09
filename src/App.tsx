@@ -5,6 +5,7 @@ import { NotFound } from "./components/NotFound"
 import { WatchListContainer } from "./components/WatchList"
 import { CoinContainer } from "./components/CoinContainer"
 import { FavoritesProvider } from "./context/FavoritesProvider"
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="*" element={ <NotFound/>} />
           </Route>
         </Routes>
+        <ReactQueryDevtools initialIsOpen={false}></ReactQueryDevtools>
       </BrowserRouter>
   )
 }
